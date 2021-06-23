@@ -2,23 +2,24 @@ import logo from './logo.svg';
 import './App.css';
 
 
+import mySocket from './socket';
+let socket = null;
+
+
 function App() {
+  
+  socket = new mySocket();
+  socket.addListen('system');
+  socket.addListen('notice');
+  const sendData = () => {
+    socket.setMessage('system', 666).then(res => {
+      console.log(res.msg)
+    })
+    socket.setMessage('notice', 666).then(res => {
+      console.log(res.msg)
+    })
+  }
 
-  // 建立socket链接
-  const createConnet = () => {
-    console.log('创建')
-    var ws = new WebSocket('ws://localhost:8080');
-    ws.onopen = function () {
-      console.log('ws onopen');
-      ws.send('from client: hello');
-    };
-    ws.onmessage = function (e) {
-      console.log('ws onmessage');
-      console.log('from server: ' + e.data);
-    };
-
-  };
-  createConnet()
   return (
     <div className="App">
       <header className="App-header">
@@ -26,6 +27,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <p onClick={sendData}>发送</p>
         <a
           className="App-link"
           href="https://reactjs.org"

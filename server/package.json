@@ -1,0 +1,14 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hello.js",
+  "scripts": {
+    "start": "node hello.js"
+  },
+  "author": "lwx",
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^7.5.0"
+  }
+}
